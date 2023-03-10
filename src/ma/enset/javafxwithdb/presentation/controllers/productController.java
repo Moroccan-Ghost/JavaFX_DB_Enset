@@ -135,7 +135,7 @@ public class productController implements Initializable {
             textNom.setText(p.getName());
             textRef.setText(p.getReference());
             textPrix.setText(String.valueOf(p.getPrice()));
-            //comboCategory.selectionModelProperty().setValue();
+            comboCategory.setValue(p.getCategory());
             selectedProduct = p;
         }
 
