@@ -93,7 +93,6 @@ public class ProductDaoImpl implements ProductDAO{
     @Override
     public void update(Product o) {
         Connection connection = ConnectionDBSingleton.getConnection();
-        System.out.println(o);
         try {
             PreparedStatement pstm = connection.prepareStatement("update PRODUCTS set NAME=?,REFERENCE=?,PRICE=?,ID_CAT=? where ID = ?");
             pstm.setString(1,o.getName());

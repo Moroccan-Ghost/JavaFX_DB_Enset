@@ -93,7 +93,6 @@ public class productController implements Initializable {
 
     public void updateProduct() {
         Product p = new Product();
-        System.out.println(selectedProduct);
         p.setId(selectedProduct.getId());
         p.setName(textNom.getText());
         p.setReference(textRef.getText());
