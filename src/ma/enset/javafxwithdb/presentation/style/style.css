@@ -1,0 +1,9 @@
+.table-column:focused{
+    -fx-background-color: blue;
+}
+.root{
+    -fx-background-color: rgba(14, 52, 192, 0.33);
+}
+.label,.button{
+    -fx-font-size: 20px;
+}

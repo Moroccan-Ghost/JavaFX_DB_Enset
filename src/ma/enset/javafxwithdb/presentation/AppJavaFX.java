@@ -13,7 +13,9 @@ public class AppJavaFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         BorderPane root = FXMLLoader.load(getClass().getResource("views/productView.fxml"));
-        Scene scene = new Scene(root,700,500);
+        Scene scene = new Scene(root,920,600);
+        scene.getStylesheets().add(getClass().getResource("style/style.css").toString());
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Products Management");
         primaryStage.show();

@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.enset.javafxwithdb.presentation.controllers.productController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="901.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.enset.javafxwithdb.presentation.controllers.productController">
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="213.0" prefWidth="861.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <GridPane>
               <columnConstraints>
@@ -29,32 +29,38 @@
                   <TextField fx:id="textPrix" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="comboCategory" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </GridPane>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="82.0" prefWidth="580.0" spacing="10.0">
                <children>
                   <Label text="Rechercher" />
                   <TextField fx:id="textSearch" />
                   <Button mnemonicParsing="false" onAction="#addProduct" text="Add" />
                   <Button mnemonicParsing="false" onAction="#updateProduct" text="Edit" />
                   <Button mnemonicParsing="false" onAction="#deleteProduct" text="Delete" />
-                  <Button mnemonicParsing="false" text="Clear All" onAction="#clearAll"/>
+                  <Button mnemonicParsing="false" onAction="#clearAll" text="Clear All" />
                </children>
             </HBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </BorderPane.margin>
       </VBox>
    </top>
    <center>
-      <TableView fx:id="tableViewProd" onMouseClicked="#loadOnClick" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableViewProd" onMouseClicked="#loadOnClick" prefHeight="197.0" prefWidth="580.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="columnId" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="columnName" prefWidth="212.19995880126953" text="NAME" />
-            <TableColumn fx:id="columnRef" prefWidth="101.4000244140625" text="REFERENCE" />
-            <TableColumn fx:id="columnPrice" prefWidth="103.4000244140625" text="PRICE" />
-            <TableColumn fx:id="columnCategory" prefWidth="107.39999389648438" text="CATEGORY" />
+          <TableColumn fx:id="columnName" prefWidth="179.80001068115234" text="NAME" />
+            <TableColumn fx:id="columnRef" prefWidth="104.20001220703125" text="REFERENCE" />
+            <TableColumn fx:id="columnPrice" prefWidth="94.79998779296875" text="PRICE" />
+            <TableColumn fx:id="columnCategory" prefWidth="149.99996948242188" text="CATEGORY" />
         </columns>
       </TableView>
    </center>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </BorderPane>
