@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import ma.enset.javafxwithdb.dao.CategoryDaoImpl;
 import ma.enset.javafxwithdb.dao.ProductDaoImpl;
 import ma.enset.javafxwithdb.dao.entities.Category;
@@ -32,15 +33,33 @@ public class productController implements Initializable {
     @FXML
     private ComboBox<Category> comboCategory;
     @FXML
-    private ListView<Product> listViewProd;
+    private TableView<Product> tableViewProd;
+    @FXML
+    private TableColumn<Long,Product> columnId;
+    @FXML
+    private TableColumn<String,Product>columnName;
+    @FXML
+    private TableColumn<String,Product> columnRef;
+    @FXML
+    private TableColumn<Float,Product> columnPrice;
+    @FXML
+    private TableColumn<Category,Product> columnCategory;
+
     private CatalogueService catalogueService;
+    private Product selectedProduct;
 
     ObservableList<Product> data = FXCollections.observableArrayList();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        listViewProd.setItems(data);
+        tableViewProd.setItems(data);
+        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        columnRef.setCellValueFactory(new PropertyValueFactory<>("reference"));
+        columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        columnCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+
         catalogueService = new CatalogueServiceImpl(new ProductDaoImpl(),new CategoryDaoImpl());
         comboCategory.getItems().addAll(catalogueService.getAllCategories());
         loadData();
@@ -73,11 +92,21 @@ public class productController implements Initializable {
     }
 
     public void updateProduct() {
+        Product p = new Product();
+        System.out.println(selectedProduct);
+        p.setId(selectedProduct.getId());
+        p.setName(textNom.getText());
+        p.setReference(textRef.getText());
+        p.setPrice(Float.parseFloat(textPrix.getText()));
+        p.setCategory(comboCategory.getSelectionModel().getSelectedItem());
+        catalogueService.updateProduct(p);
 
+
+        loadData();
     }
 
     public void deleteProduct() {
-        Product p = listViewProd.getSelectionModel().getSelectedItem();
+        Product p = tableViewProd.getSelectionModel().getSelectedItem();
         if(p==null){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("No Product Selected");
@@ -90,7 +119,9 @@ public class productController implements Initializable {
             if (result == ButtonType.OK) {
                 catalogueService.deleteProduct(p);
             } else {
-                System.out.println("Deletion cancelled.");
+                Alert alertInfo = new Alert(Alert.AlertType.INFORMATION);
+                alertInfo.setContentText("Deletion cancelled.");
+                alertInfo.show();
             }
 
         }
@@ -100,13 +131,17 @@ public class productController implements Initializable {
     }
 
     public void loadOnClick(){
-        Product p = listViewProd.getSelectionModel().getSelectedItem();
-        textNom.setText(p.getName());
-        textRef.setText(p.getReference());
-        textPrix.setText(String.valueOf(p.getPrice()));
-        //comboCategory.setValue(p.getCategory());
+        Product p = tableViewProd.getSelectionModel().getSelectedItem();
+        if(p!=null){
+            textNom.setText(p.getName());
+            textRef.setText(p.getReference());
+            textPrix.setText(String.valueOf(p.getPrice()));
+            //comboCategory.selectionModelProperty().setValue();
+            selectedProduct = p;
+        }
+
     }
-    private void clearAll(){
+    public void clearAll(){
         textNom.setText("");
         textPrix.setText("");
         textRef.setText("");

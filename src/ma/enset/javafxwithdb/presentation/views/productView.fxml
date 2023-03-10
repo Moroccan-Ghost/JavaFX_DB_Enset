@@ -33,10 +33,11 @@
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Rechercher" />
-                  <TextField fx:id="textSearch"/>
-                  <Button mnemonicParsing="false" text="Add" onAction="#addProduct"/>
-                  <Button mnemonicParsing="false" text="Edit" onAction="#updateProduct"/>
-                  <Button mnemonicParsing="false" text="Delete" onAction="#deleteProduct"/>
+                  <TextField fx:id="textSearch" />
+                  <Button mnemonicParsing="false" onAction="#addProduct" text="Add" />
+                  <Button mnemonicParsing="false" onAction="#updateProduct" text="Edit" />
+                  <Button mnemonicParsing="false" onAction="#deleteProduct" text="Delete" />
+                  <Button mnemonicParsing="false" text="Clear All" onAction="#clearAll"/>
                </children>
             </HBox>
          </children>
@@ -46,6 +47,14 @@
       </VBox>
    </top>
    <center>
-      <ListView fx:id="listViewProd" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"  onMouseClicked="#loadOnClick"/>
+      <TableView fx:id="tableViewProd" onMouseClicked="#loadOnClick" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="columnId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="columnName" prefWidth="212.19995880126953" text="NAME" />
+            <TableColumn fx:id="columnRef" prefWidth="101.4000244140625" text="REFERENCE" />
+            <TableColumn fx:id="columnPrice" prefWidth="103.4000244140625" text="PRICE" />
+            <TableColumn fx:id="columnCategory" prefWidth="107.39999389648438" text="CATEGORY" />
+        </columns>
+      </TableView>
    </center>
 </BorderPane>

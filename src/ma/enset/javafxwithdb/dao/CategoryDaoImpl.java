@@ -13,7 +13,21 @@ import java.util.List;
 public class CategoryDaoImpl implements CategoryDAO{
     @Override
     public Category find(long id) {
-        return null;
+
+        Category c = new Category();
+        Connection connection  = ConnectionDBSingleton.getConnection();
+        try {
+            PreparedStatement pstm = connection.prepareStatement("select * from Category WHERE ID_CAT = ?");
+            pstm.setLong(1,id);
+            ResultSet rs =  pstm.executeQuery();
+            if (rs.next()){
+                c.setId(rs.getLong("ID_CAT"));
+                c.setName(rs.getString("NAME"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return c;
     }
 
     @Override

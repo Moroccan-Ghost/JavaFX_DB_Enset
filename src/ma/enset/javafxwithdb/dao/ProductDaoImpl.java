@@ -24,6 +24,10 @@ public class ProductDaoImpl implements ProductDAO{
                 p.setName(rs.getString("NAME"));
                 p.setReference(rs.getString("REFERENCE"));
                 p.setPrice(rs.getFloat("PRICE"));
+
+                CategoryDAO categoryDAO = new CategoryDaoImpl();
+                Category c = categoryDAO.find(rs.getLong("ID_CAT"));
+                p.setCategory(c);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -44,6 +48,10 @@ public class ProductDaoImpl implements ProductDAO{
                 p.setName(rs.getString("NAME"));
                 p.setReference(rs.getString("REFERENCE"));
                 p.setPrice(rs.getFloat("PRICE"));
+
+                CategoryDAO categoryDAO = new CategoryDaoImpl();
+                Category c = categoryDAO.find(rs.getLong("ID_CAT"));
+                p.setCategory(c);
                 products.add(p);
 
             }
@@ -85,12 +93,14 @@ public class ProductDaoImpl implements ProductDAO{
     @Override
     public void update(Product o) {
         Connection connection = ConnectionDBSingleton.getConnection();
+        System.out.println(o);
         try {
-            PreparedStatement pstm = connection.prepareStatement("update PRODUCTS set NAME=?,REFERENCE=?,PRICE=? where ID = ?");
+            PreparedStatement pstm = connection.prepareStatement("update PRODUCTS set NAME=?,REFERENCE=?,PRICE=?,ID_CAT=? where ID = ?");
             pstm.setString(1,o.getName());
             pstm.setString(2,o.getReference());
             pstm.setFloat(3,o.getPrice());
-            pstm.setLong(4,o.getId());
+            pstm.setFloat(4,o.getCategory().getId());
+            pstm.setLong(5,o.getId());
             pstm.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();

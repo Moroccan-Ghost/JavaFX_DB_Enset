@@ -60,6 +60,12 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return name ;
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", reference='" + reference + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                '}';
     }
 }
